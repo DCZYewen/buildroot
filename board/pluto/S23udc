@@ -69,7 +69,8 @@ case "$1" in
 	model_variant=`dmesg | grep m25p80 | grep Kbytes | cut -d ' ' -f 3`
 
 	serial=`dmesg | grep SPI-NOR-UniqueID`
-
+	serial=${serial#*SPI-NOR-UniqueID }
+	
 	create_iiod_context_attributes "$model" "$serial" "$model_variant"
 
 	echo $serial > /etc/serial
